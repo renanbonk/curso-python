@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="t-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'exemplos_basicos/sobre.css' %}">
+</head>
+<body>
+    <h1>Perfil</h1>
+    <form action="cadastrar" method="get">
+        <div>
+            <label for="campo-nome">Nome</label>
+            <input type="text" name="nome" id="campo-nome">
+        </div><br>
+        <div>
+            <label for="campo-sobrnome">Sobrenome</label>
+            <input type="text" name="sobrenome" id="campo-sobrenome">
+        </div><br>
+        <div>
+            <label for="campo-idade">Idade</label>
+            <input type="number" name="idade" id="campo-idade">
+        </div><br>
+        <div>
+            <label for="campo-peso">Peso</label>
+            <input type="text" name="peso" id="campo-peso">
+        </div><br>
+        <div>
+            <label for="campo-altura">Altura</label>
+            <input type="text" name="altura" id="campo-altura">
+        </div><br>
+
+        <Button type="submit">Cadastrar</Button>
+    </form>
+
+</body>
+</html>

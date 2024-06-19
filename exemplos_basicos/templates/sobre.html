@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="t-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'exemplos_basicos/sobre.css' %}">
+</head>
+<body>
+    <h1>Perfil</h1>
+    <span><img  width="300" height="300" src="https://blog.frankshoes.com.br/wp-content/uploads/2023/01/David-Beckham-2-640x427_Easy-Resize.com_-1024x683.jpg" alt=""></span> <br>
+    <span>Nome: {{ nome }}</span> <br>
+    <span>Sobrenome: {{ sobrenome }}</span> <br>
+    <span>Nome completado: {{ nome_completo }}</span> <br>
+    <span>Idade: {{ idade }}</span> <br>
+    <span>Ano de Nascimento: {{ ano_acimento }}</span><br>
+    <span>Peso: {{ peso }}</span> <br>
+    <span>Altura: {{ altura }}</span> <br>
+    <span>Imc: {{ imc }}</span> <br>
+    
+</body>
+</html>

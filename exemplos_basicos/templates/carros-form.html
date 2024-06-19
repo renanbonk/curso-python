@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="cadastrar-carros">
+        {% csrf_token %}
+        <h1>Selecione o carro para cadastro</h1>
+        <div>
+            <label for="campo-modelo">Modelo</label>
+            <input type="text" name="modelo" id="campo-nome">
+        </div><br>
+        <div>
+            <label for="campo-preco">Preço</label>
+            <input type="text" name="preco" id="campo-preco">
+        </div> <br>
+        <div>
+            <label for="campo_ano_fabricacao">Ano de fabrição</label>
+            <input type="date" name="ano_fabricacao" id="campo_ano_fabricacao">
+        </div><br>
+        <div>
+            <label for="campo-cor">Cor</label>
+            <select name="cor" id="campo-cor">
+                <option value="azul">Azul</option>
+                <option value="preto">Preto</option>
+                <option value="branco">Branco</option>
+                <option value="prata">Prata</option>
+                <option value="vermelho">Vermelho</option>
+            </select>
+        </div><br>
+        <button type="submit">Cadastrar Veiculo</button>
+    </form>
+
+</body>
+</html>
