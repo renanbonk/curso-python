@@ -4,19 +4,13 @@
 <div class="columns is-centered">
     <h1 class="title">Editar Categoria</h1>
 </div>
-<form action="/interno/categoria/editar/{{categoria.pk}}" method="post">
+<form action="/interno/categoria-form/editar/{{categoria.pk}}" method="post">
     {%csrf_token%}
+    {{form.as_div}}
 
-    <div class="field">
-        <label class="label" for="nome">Nome</label>
-        <div class="control">
-            <input class="input" type="text" name="nome" id="nome" placeholder="Ex. Frutas" autofocus 
-            required minlength="3" maxlength="100"
-            value="{{categoria.nome}}">
-        </div>
     </div>
     <div class="is-pulled-right">
-        <a href="/interno/categoria" class="button is-outlined is-danger">
+        <a href="/interno/categoria-form" class="button is-outlined is-danger">
             <span class="icon">
                 <i class="fa-solid fa-xmark"></i>
             </span>

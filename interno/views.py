@@ -1,4 +1,7 @@
+from urllib import request
 from django.shortcuts import render, redirect
+
+from interno.forms import CategoriaForm
 from . import models
 
 
@@ -78,3 +81,47 @@ def estado_editar(request, id: int):
     return redirect ("estados")
 
 # Create your views here.
+
+def categoria_form_index(request):
+    categorias = models.Categoria.objects.all()
+    property(categorias)
+    contexto={
+        "categorias": categorias
+    }
+    return render(request,"categorias_forms/index.html", context=contexto)
+    
+    
+def categoria_form_cadastrar(request):
+    if request.method == "POST":
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("categorias_form")
+    else:
+        form = CategoriaForm()  
+    contexto = {"form": form} 
+    return render(request, "categorias_forms/cadastrar.html", context=contexto)
+
+
+def categoria_form_apagar(request,id:int):
+    categoria = models.Categoria.objects.get(pk=id)
+    categoria.delete()
+
+    return redirect ("categorias_form")
+
+
+def categoria_form_editar(request,id:int):
+    categoria = models.Categoria.objects.get(pk=id)
+    if request.method == "POST":
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return redirect("categorias_form")
+    else:
+        form = CategoriaForm(instance=categoria)    
+
+    contexto = {
+            "form": form,
+            "categoria": categoria
+            }
+    return render(request,"categorias_forms/editar.html", contexto)

@@ -10,7 +10,11 @@ urlpatterns = [
     path("/categoria/editar/<int:id>", views.categoria_editar),
     path("/estados", views.estado_index, name="estados"),
     path("/estados/cadastrar", views.estado_cadastrar),
-    path("/estados/apagar/int:id>", views.estado_apagar),
-    path("/estados/editar/int:id>",views.estado_editar),
+    path("/estados/apagar/<int:id>", views.estado_apagar),
+    path("/estados/editar/<int:id>",views.estado_editar),
+    path("/categoria-form", views.categoria_form_index, name="categorias_form"),
+    path("/categoria-form/cadastrar", views.categoria_form_cadastrar),
+    path("/categoria-form/apagar/<int:id>", views.categoria_form_apagar),
+    path("/categoria-form/editar/<int:id>",views.categoria_form_editar),
 
 ]
