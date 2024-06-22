@@ -25,4 +25,9 @@ urlpatterns = [
     path("/produto/apagar/<int:id>", views.produto_apagar),
     path("/produto/editar/<int:id>", views.produto_editar),
 
+    path("/cidade", views.cidade_index, name="cidades"),
+    path("/cidade/cadastrar", views.cidade_cadastrar),
+   # path("/cidade/apagar/<int:id>", views.cidade_apagar),
+    path("/cidade/editar/<int:id>", views.cidade_editar),
+
 ]

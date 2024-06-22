@@ -194,11 +194,13 @@ def cidade_cadastrar(request):
         estado= request.POST.get("estado")
         quantidade_habitantes= request.POST.get("quantidade_habitantes")
         clima= request.POST.get("clima")
+        data_fundacao= request.POST.get("data_fundacao")
         cidade = models.Cidade(
             nome=nome,
             estado=estado,
             quantidade_habitantes=quantidade_habitantes,
             clima=clima,
+            data_fundacao=data_fundacao,
         )
         cidade.save()
         return redirect("cidades")
@@ -207,4 +209,25 @@ def cidade_cadastrar(request):
     return render (request,"cidades/cadastrar.html", contexto)
 
 def cidade_editar(request):
-    pass
+    cidade = models.Cidade.objects.get(pk=id)
+
+    if request.method == "POST":
+        nome = request.POST.get("cidade")
+        estado= request.POST.get("estado")
+        quantidade_habitantes= request.POST.get("quantidade_habitantes")
+        clima= request.POST.get("clima")
+        data_fundacao= request.POST.get("data_fundacao")
+        cidade.nome = nome
+        cidade.estado = estado
+        cidade.quantidade_habitantes= quantidade_habitantes
+        cidade.clima = clima
+        cidade.data_fundacao = data_fundacao
+        cidade.save()
+        return redirect("cidades")
+    
+    estados = models.Estado.objects.all()
+    contexto= {
+        "estados": estados,
+        "cidades": cidade,
+    }
+    return render(request, "cidades/editar.html", contexto)
