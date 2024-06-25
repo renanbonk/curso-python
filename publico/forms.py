@@ -9,4 +9,14 @@ class ClienteCadastroForm(forms.ModelForm):
 class ContatoCadastroForm(forms.ModelForm):
     class Meta:
         model = models.contato
-        fields = ["tipo", "valor"]        
+        fields = ["tipo", "valor"] 
+        widgets = {
+            "valor": forms.TextInput(attrs={
+                'class': "input"
+            }),
+            "tipo": forms.Select(attrs={
+                "class": "select"
+            })
+        }  
+
+     

@@ -49,7 +49,10 @@ def contato_detalhe(request, id: int):
 
 
 def contato_editar(request, id: int):
-    pass
+    contato = get_object_or_404(models.contato,id=id)
+    form = ContatoCadastroForm(request.POST, instance=contato)
+    contato= form.save()
+    return redirect("cliente_detalhe", contato.cliente.id)
 
 
 def endereco_cadastrar(request):

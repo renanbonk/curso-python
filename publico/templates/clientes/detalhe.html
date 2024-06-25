@@ -1,37 +1,26 @@
+{% extends 'base_publico.html'%}
+
+{% block body%}
 <div>
     <span>Nome: </span>
     <span>{{cliente.nome}}</span>
 </div>
+<div class="tabs">
+    <ul>
+        <li data-tab-id="tab-contatos" class="is-active"><a>Contatos</a></li>
+        <li data-tab-id="tab-enderecos"><a>Endereços</a></li>
+    </ul>
+</div>
+<div id="tab-contatos" class="tab-content active">
+    {% include 'clientes/tabs/tab-contatos.html'%}
+</div>
 
-<h1>Lista de contatos</h1>
+<div id="tab-enderecos" class="tab-content">
+    Olá mundo
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Tipo</th>
-            <th>Valor</th>
-            <th>Ação</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for contato in contatos %}
-        <tr>
-            <td>{{contato.tipo}}</td>
-            <td>{{contato.valor}}</td>
-            <td>
-                <button href="Editar">Editar</button>
-                <a href="/publico/contato/apagar/{{contato.id}}">Apagar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<form method="post" action="/publico/contato/cadastrar/{{cliente.id}}">
-    {% csrf_token %}
-    {{ form_contato.as_div }}
-    <button type="submit">Cadastrar</button>
-</form>
 
 {% load static %}
 <script src="{% static 'js/cliente-contato.js' %}"></script>
+
+{%endblock%}
