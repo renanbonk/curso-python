@@ -25,6 +25,13 @@
         {% for produto in produtos %}
         <tr>
             <td>{{produto.pk}}</td>
+            <td>
+                {% if produto.imagem and produto.imagem.url%}
+                    <img src="{{produto.imagem.url}}" class="image is-128x128">
+                {% else %}
+                    <span>imagem não cadastrada</span>
+                {% endif %}
+            </td>
             <td>{{produto.nome}}</td>
             <td>{{produto.categoria.nome}}</td>
             <td>R$ {{produto.preco}}</td>

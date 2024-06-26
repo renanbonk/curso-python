@@ -1,23 +1,33 @@
 {% extends 'base_publico.html'%}
 
 {% block body%}
-<div>
-    <span>Nome: </span>
-    <span>{{cliente.nome}}</span>
-</div>
-<div class="tabs">
-    <ul>
-        <li data-tab-id="tab-contatos" class="is-active"><a>Contatos</a></li>
-        <li data-tab-id="tab-enderecos"><a>Endereços</a></li>
-    </ul>
-</div>
-<div id="tab-contatos" class="tab-content active">
-    {% include 'clientes/tabs/tab-contatos.html'%}
+<div class="columns">
+    <div class="column">
+        <form method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{form.as_div}}
+            <button type="submit">Alterar</button>
+        </form>
+    </div>
+
+    <div class="column">
+        <div class="tabs">
+            <ul>
+                <li data-tab-id="tab-contatos" class="is-active"><a>Contatos</a></li>
+                <li data-tab-id="tab-enderecos"><a>Endereços</a></li>
+            </ul>
+        </div>
+        <div id="tab-contatos" class="tab-content active">
+            {% include 'clientes/tabs/tab-contatos.html'%}
+        </div>
+
+        <div id="tab-enderecos" class="tab-content">
+            Olá mundo
+        </div>
+    </div>
 </div>
 
-<div id="tab-enderecos" class="tab-content">
-    Olá mundo
-</div>
+
 
 
 {% load static %}

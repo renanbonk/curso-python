@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from publico import models
-from publico.forms import ClienteCadastroForm, ContatoCadastroForm
+from publico.forms import ClienteCadastroForm, ClienteEditarDetalheForm, ContatoCadastroForm
 
 # Create your views here.
 def cliente_cadastrar(request):
@@ -20,11 +20,23 @@ def cliente_cadastrar(request):
 
 def cliente_detalhe(request, id: int):
     cliente = get_object_or_404(models.Cliente, id=id)
+    if request.method == "POST":
+        form_cliente = ClienteEditarDetalheForm(request.POST, request.FILES, instance=cliente)
+        if form_cliente.is_valid():
+            form_cliente.save()
+
     contatos=cliente.get_contatos()
+
+    form_cliente = ClienteEditarDetalheForm(instance=cliente)
 
     form_contato = ContatoCadastroForm()
 
-    contexto = {"cliente": cliente, "contatos": contatos, "form_contato": form_contato}
+    contexto = {
+        "cliente": cliente, 
+        "contatos": contatos, 
+        "form_contato": form_contato,
+        "form": form_cliente,
+        }
     return render(request, "clientes/detalhe.html", contexto)
 
 
