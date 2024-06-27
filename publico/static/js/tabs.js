@@ -1,3 +1,5 @@
+const tabs = document.querySelectorAll('.tabs ul li')
+
 tabs.forEach(tab => {
     tab.addEventListener('click', function () {
         // Remove 'is-active' class from all tabs

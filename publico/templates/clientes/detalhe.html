@@ -1,36 +1,37 @@
-{% extends 'base_publico.html'%}
+{% extends 'base_publico.html' %}
 
-{% block body%}
-<div class="columns">
-    <div class="column">
-        <form method="post" enctype="multipart/form-data">
-            {%csrf_token%}
-            {{form.as_div}}
-            <button type="submit">Alterar</button>
-        </form>
+{% block body %}
+    <div class="columns">
+        <div class="column">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_div }}
+                <button type="submit">Alterar</button>
+            </form>
+        </div>
+
+        <div class="column">
+            <div class="tabs">
+                <ul>
+                    <li data-tab-id="tab-contatos" class="is-active"><a>Contatos</a></li>
+                    <li data-tab-id="tab-enderecos"><a>Endereços</a></li>
+                </ul>
+            </div>
+            <div id="tab-contatos" class="tab-content active">
+                {% include 'clientes/tabs/tab-contatos.html' %}
+            </div>
+
+            <div id="tab-enderecos" class="tab-content">
+                {% include 'clientes/tabs/tab-endercos.html' %}
+            </div>
+        </div>
     </div>
+{% endblock %}
 
-    <div class="column">
-        <div class="tabs">
-            <ul>
-                <li data-tab-id="tab-contatos" class="is-active"><a>Contatos</a></li>
-                <li data-tab-id="tab-enderecos"><a>Endereços</a></li>
-            </ul>
-        </div>
-        <div id="tab-contatos" class="tab-content active">
-            {% include 'clientes/tabs/tab-contatos.html'%}
-        </div>
+{% block scripts %}
 
-        <div id="tab-enderecos" class="tab-content">
-            Olá mundo
-        </div>
-    </div>
-</div>
+    {% load static %}
+    <script src="{% static 'js/cliente-contato.js' %}">
+    </script><script src="{% static 'js/cliente-endereco.js' %}"></script>
 
-
-
-
-{% load static %}
-<script src="{% static 'js/cliente-contato.js' %}"></script>
-
-{%endblock%}
+{% endblock %}

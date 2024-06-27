@@ -38,8 +38,5 @@ document.getElementById("form-contato-botao-cadastrar").onclick = submitFormDado
 
 
 
-const tabs = document.querySelectorAll('.tabs ul li');
-
-
 
 
