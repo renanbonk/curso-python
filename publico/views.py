@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.forms import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -18,8 +19,9 @@ def cliente_cadastrar(request):
     contexto = {"form": form}
     return render(request, "clientes/cadastrar.html", contexto)
 
-
-def cliente_detalhe(request, id: int):
+@login_required
+def cliente_detalhe(request):
+    id= request.user.id
     cliente = get_object_or_404(models.Cliente, id=id)
     if request.method == "POST":
         form_cliente = ClienteEditarDetalheForm(request.POST, request.FILES, instance=cliente)
@@ -51,35 +53,35 @@ def cliente_detalhe(request, id: int):
     }
     return render(request, "clientes/detalhe.html", contexto)
 
-
+@login_required
 def contato_cadastrar(request, id_cliente: int):
     cliente = get_object_or_404(models.Cliente, id=id_cliente)
     form = ContatoCadastroForm(request.POST)
     contato = form.save(commit=False)
     contato.cliente = cliente
     contato.save()
-    return redirect("cliente_detalhe", id=cliente.id)
+    return redirect("cliente_detalhe")
 
-
+@login_required
 def contato_apagar(request, id: int):
     contato = get_object_or_404(models.contato, id=id)
     id_cliente = contato.cliente.id
     contato.delete()
-    return redirect("cliente_detalhe", id=id_cliente)
+    return redirect("cliente_detalhe")
 
-
+@login_required
 def contato_detalhe(request, id: int):
     contato = get_object_or_404(models.contato, id=id)
     return JsonResponse(model_to_dict(contato))
 
-
+@login_required
 def contato_editar(request, id: int):
     contato = get_object_or_404(models.contato, id=id)
     form = ContatoCadastroForm(request.POST, instance=contato)
     contato = form.save()
     return redirect("cliente_detalhe", contato.cliente.id)
 
-
+@login_required
 def endereco_cadastrar(request, id_cliente: id):
     cliente = get_object_or_404(models.Cliente, id=id_cliente)
     form = EnderecoCadastroForm(request.POST)
@@ -88,15 +90,15 @@ def endereco_cadastrar(request, id_cliente: id):
     endereco.save()
     request.session['registro_criado']=True
     request.session['registro_criado_mensagem'] = "Endereço criado com sucesso"
-    return redirect("cliente_detalhe", id=cliente.id)
+    return redirect("cliente_detalhe")
 
-
+@login_required
 def endereco_editar(request, id: int):
     pass
 
-
+@login_required
 def endereco_apagar(request, id: int):
     endereco = get_object_or_404(models.Endereco, id=id)
     id_cliente = endereco.cliente.id
     endereco.delete()
-    return redirect("cliente_detalhe", id=id_cliente)
+    return redirect("cliente_detalhe")

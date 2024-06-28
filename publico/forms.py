@@ -1,6 +1,7 @@
 from enum import Enum
 
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 from publico.widgets import CustomFileInput, CustomSelect
 
@@ -40,7 +41,7 @@ class Estado(Enum):
         return [(key.name, key.value) for key in cls]
 
 
-class ClienteCadastroForm(forms.ModelForm):
+class ClienteCadastroForm(UserCreationForm):
     class Meta:
         model = models.Cliente
         fields = ['nome', 'cpf', 'data_nascimento', 'email']
